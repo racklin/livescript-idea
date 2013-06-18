@@ -108,13 +108,13 @@ NUMBER          = (0(x|X)[0-9a-fA-F]+)|(-?[0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)
 FUNCTION        = [_a-zA-Z]([$_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
 OBJECT_KEY      = [_a-zA-Z]([$_a-zA-Z0-9])*[:][^:]
 
-RESERVED        = default|function|var|with|enum|export|native|__hasProp|__extends|__slice|__bind|__indexOf
+RESERVED        = with|enum|export|native|__hasProp|__extends|__slice|__bind|__indexOf
 LOGIC           = and|&&|or|\|\||&|\||\^|\?
 COMPARE         = ==|\!=|<|>|<=|>=|is|isnt
 COMPOUND_ASSIGN = -=|\+=|\/=|\*=|%=|\|\|=|&&=|\?=|<<=|>>=|>>>=|&=|\^=|\|=|or=
 BOOL            = true|yes|on|false|no|off|undefined|null
-UNARY           = do|new|typeof|typeof\!|delete|\~|\!|not|let
-QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or
+UNARY           = do|new|typeof|typeof\!|delete|\~|\!|not
+QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or|import|all|case|default|from|xor|match|own|otherwise|function|var|let
 
 %state YYIDENTIFIER, YYNUMBER, YYJAVASCRIPT
 %state YYDOUBLEQUOTESTRING, YYSINGLEQUOTESTRING, YYBACKSLASHQUOTESTRING
@@ -154,6 +154,8 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   "until"                     { return LiveScriptTokenTypes.UNTIL; }
   "switch"                    { return LiveScriptTokenTypes.SWITCH; }
   "when"                      { return LiveScriptTokenTypes.WHEN; }
+  "case"                      { return LiveScriptTokenTypes.WHEN; }
+  "default"                      { return LiveScriptTokenTypes.ELSE; }
   "break"                     { return LiveScriptTokenTypes.BREAK; }
   "continue"                  { return LiveScriptTokenTypes.CONTINUE; }
   "return"                    { return LiveScriptTokenTypes.RETURN; }
@@ -206,6 +208,7 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   {NUMBER}                    { yybegin(YYNUMBER);
                                 return LiveScriptTokenTypes.NUMBER; }
 
+  "=>"                        { return LiveScriptTokenTypes.THEN; }
 
   "->"                        { return LiveScriptTokenTypes.FUNCTION; }
   "~>"                        { return LiveScriptTokenTypes.FUNCTION_BIND; }
@@ -386,6 +389,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
                                 return LiveScriptTokenTypes.RANGE; }
 
   [ |\t]+til[ \t]+                       { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.RANGE; }
+
+  [ |\t]+by[ \t]+                        { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.RANGE; }
 }
 
