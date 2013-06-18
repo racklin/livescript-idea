@@ -6,7 +6,7 @@ import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import org.livescriptidea.lang.lexer.LiveScriptFlexLexer;
+import org.livescriptidea.lang.lexer.LiveScriptLexerAdapter;
 import org.livescriptidea.lang.lexer.LiveScriptTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
 
   @NotNull
   public Lexer getHighlightingLexer() {
-    return new LiveScriptFlexLexer();
+    return new LiveScriptLexerAdapter();
   }
 
   static final TextAttributesKey BAD_CHARACTER = TextAttributesKey.createTextAttributesKey(

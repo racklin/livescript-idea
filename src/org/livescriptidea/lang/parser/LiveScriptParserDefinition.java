@@ -12,7 +12,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 
 import org.livescriptidea.file.LiveScriptFileType;
-import org.livescriptidea.lang.lexer.LiveScriptFlexLexer;
+import org.livescriptidea.lang.lexer.LiveScriptLexerAdapter;
 import org.livescriptidea.lang.lexer.LiveScriptTokenSets;
 import org.livescriptidea.lang.psi.LiveScriptFile;
 import org.livescriptidea.lang.psi.impl.LiveScriptElementImpl;
@@ -30,7 +30,7 @@ public class LiveScriptParserDefinition implements ParserDefinition {
 
   @NotNull
   public Lexer createLexer(Project project) {
-    return new LiveScriptFlexLexer();
+    return new LiveScriptLexerAdapter();
   }
 
   public PsiParser createParser(Project project) {
