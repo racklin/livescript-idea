@@ -114,4 +114,10 @@ public interface LiveScriptTokenTypes {
   public static final IElementType RETURN = new LiveScriptElementType("RETURN");
   public static final IElementType INSTANCE_OF = new LiveScriptElementType("INSTANCE_OF");
 
+
+
+  public static final IElementType BACKCALL = new LiveScriptElementType("BACKCALL");
+  public static final IElementType BACKCALL_BIND = new LiveScriptElementType("BACKCALL_BIND");
+  public static final IElementType PIPE = new LiveScriptElementType("PIPE");
+
 }

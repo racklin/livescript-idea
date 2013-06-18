@@ -105,8 +105,8 @@ IDENTIFIER      = [$_a-z][$_a-zA-Z0-9]*
 CLASS_NAME      = [A-Z][$_a-zA-Z0-9]*
 CONSTANT        = [A-Z][$_A-Z0-9]*
 NUMBER          = (0(x|X)[0-9a-fA-F]+)|(-?[0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)
-FUNCTION        = [_a-zA-Z]([$_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
-OBJECT_KEY      = [_a-zA-Z]([$_a-zA-Z0-9])*[:][^:]
+FUNCTION        = [_a-zA-Z]([$\-_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
+OBJECT_KEY      = [_a-zA-Z]([$\-_a-zA-Z0-9])*[:][^:]
 
 RESERVED        = with|enum|export|native|__hasProp|__extends|__slice|__bind|__indexOf
 LOGIC           = and|&&|or|\|\||&|\||\^|\?
@@ -121,6 +121,7 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 %state YYDOUBLEQUOTEHEREDOC, YYSINGLEQUOTEHEREDOC
 %state YYREGEX, YYHEREGEX, YYREGEXFLAG, YYREGEXCHARACTERCLASS
 %state YYINTERPOLATION, YYQUOTEPROPERTY, YYCLASSNAME
+%state YYBLOCKCOMMENT
 
 %%
 
@@ -155,7 +156,7 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   "switch"                    { return LiveScriptTokenTypes.SWITCH; }
   "when"                      { return LiveScriptTokenTypes.WHEN; }
   "case"                      { return LiveScriptTokenTypes.WHEN; }
-  "default"                      { return LiveScriptTokenTypes.ELSE; }
+  "default"                   { return LiveScriptTokenTypes.ELSE; }
   "break"                     { return LiveScriptTokenTypes.BREAK; }
   "continue"                  { return LiveScriptTokenTypes.CONTINUE; }
   "return"                    { return LiveScriptTokenTypes.RETURN; }
@@ -213,6 +214,12 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   "->"                        { return LiveScriptTokenTypes.FUNCTION; }
   "~>"                        { return LiveScriptTokenTypes.FUNCTION_BIND; }
 
+  "<-"                        { return LiveScriptTokenTypes.BACKCALL; }
+  "<~"                        { return LiveScriptTokenTypes.BACKCALL_BIND; }
+
+  "|>"                        { return LiveScriptTokenTypes.PIPE; }
+  "<|"                        { return LiveScriptTokenTypes.PIPE; }
+
   "="                         { return LiveScriptTokenTypes.EQUAL; }
 
   "["                         { return LiveScriptTokenTypes.BRACKET_START; }
@@ -223,6 +230,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 
   "<["                         { return LiveScriptTokenTypes.BRACKET_START; }
   "]>"                         { return LiveScriptTokenTypes.BRACKET_END; }
+
+  "/*"                        { yybegin(YYBLOCKCOMMENT);
+                                return LiveScriptTokenTypes.BLOCK_COMMENT; }
 
   /* Push the state because the braces are important for determining the interpolation */
   "{"                         { pushState();
@@ -248,7 +258,6 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   "/" / [^/= ]                { yybegin(YYREGEX);
                                 return LiveScriptTokenTypes.REGEX_START; }
 
-  \/\*~\*\/                       { return LiveScriptTokenTypes.BLOCK_COMMENT; }
   (##?)(.*)*[^\n\r]?          { return LiveScriptTokenTypes.LINE_COMMENT; }
 
   {TERMINATOR}                { return LiveScriptTokenTypes.TERMINATOR; }
@@ -629,6 +638,22 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   [^]                         { yypushback(yytext().length());
                                 yybegin(YYINITIAL); }
 }
+
+/***********************/
+/* Block Comment       */
+/***********************/
+<YYBLOCKCOMMENT> {
+  "*/"                         { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.BLOCK_COMMENT; }
+
+  [^*\n]+                     { return LiveScriptTokenTypes.BLOCK_COMMENT; }
+
+  "*"                         { return LiveScriptTokenTypes.BLOCK_COMMENT; }
+
+  \n                         { return LiveScriptTokenTypes.BLOCK_COMMENT; }
+
+}
+
 
 /*******************/
 /* Nothing matched */
