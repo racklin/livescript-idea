@@ -108,7 +108,7 @@ NUMBER          = (0(x|X)[0-9a-fA-F]+)|(-?[0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)
 FUNCTION        = [_a-zA-Z]([$_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
 OBJECT_KEY      = [_a-zA-Z]([$_a-zA-Z0-9])*[:][^:]
 
-RESERVED        = case|default|function|var|void|with|const|let|enum|export|import|native|__hasProp|__extends|__slice|__bind|__indexOf
+RESERVED        = default|function|var|with|enum|export|native|__hasProp|__extends|__slice|__bind|__indexOf
 LOGIC           = and|&&|or|\|\||&|\||\^|\?
 COMPARE         = ==|\!=|<|>|<=|>=|is|isnt
 COMPOUND_ASSIGN = -=|\+=|\/=|\*=|%=|\|\|=|&&=|\?=|<<=|>>=|>>>=|&=|\^=|\|=|or=
@@ -117,7 +117,7 @@ UNARY           = do|new|typeof|typeof\!|delete|\~|\!|not|let
 QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or
 
 %state YYIDENTIFIER, YYNUMBER, YYJAVASCRIPT
-%state YYDOUBLEQUOTESTRING, YYSINGLEQUOTESTRING
+%state YYDOUBLEQUOTESTRING, YYSINGLEQUOTESTRING, YYBACKSLASHQUOTESTRING
 %state YYDOUBLEQUOTEHEREDOC, YYSINGLEQUOTEHEREDOC
 %state YYREGEX, YYHEREGEX, YYREGEXFLAG, YYREGEXCHARACTERCLASS
 %state YYINTERPOLATION, YYQUOTEPROPERTY, YYCLASSNAME
@@ -171,6 +171,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   \'                          { yybegin(YYSINGLEQUOTESTRING);
                                 return LiveScriptTokenTypes.STRING_LITERAL; }
 
+  \\                          { yybegin(YYBACKSLASHQUOTESTRING);
+                                return LiveScriptTokenTypes.STRING_LITERAL; }
+
   "\"\"\""                    { yybegin(YYDOUBLEQUOTEHEREDOC);
                                 return LiveScriptTokenTypes.HEREDOC_START; }
 
@@ -214,6 +217,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 
   "("                         { return LiveScriptTokenTypes.PARENTHESIS_START; }
   ")"                         { return LiveScriptTokenTypes.PARENTHESIS_END; }
+
+  "<["                         { return LiveScriptTokenTypes.BRACKET_START; }
+  "]>"                         { return LiveScriptTokenTypes.BRACKET_END; }
 
   /* Push the state because the braces are important for determining the interpolation */
   "{"                         { pushState();
@@ -376,10 +382,10 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 /*****************************************************************/
 
 <YYNUMBER> {
-  "to"                        { yybegin(YYINITIAL);
+  [ |\t]+to[ \t]+                        { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.RANGE; }
 
-  "til"                       { yybegin(YYINITIAL);
+  [ |\t]+til[ \t]+                       { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.RANGE; }
 }
 
@@ -431,6 +437,25 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
                                 yybegin(YYINITIAL); }
 }
 
+/****************************************/
+/* Content of a backslash quoted string */
+/****************************************/
+
+<YYBACKSLASHQUOTESTRING> {
+  {WHITE_SPACE}               { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.WHITE_SPACE; }
+
+  [^\\\n\r\\ \t\]]+                { return LiveScriptTokenTypes.STRING; }
+
+  {TERMINATOR}                { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.TERMINATOR; }
+
+  "]"                        { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.BRACKET_END; }
+
+  [^]                         { yypushback(yytext().length());
+                                yybegin(YYINITIAL); }
+}
 /***************************************/
 /* Content of a double quoted heredocs */
 /***************************************/
