@@ -1,6 +1,7 @@
 ## Features
 
 LiveScriptIdea is a plugin for your [JetBrains](http://www.jetbrains.com) IDE to develop your LiveScript.
+Support Products: IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode, Android Studio
 
 * Syntax highlighting with a color settings preference pane
 * Commenting and uncommenting of line and block comments
