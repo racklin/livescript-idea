@@ -59,6 +59,11 @@ public class LiveScriptColorSettingsPage implements ColorSettingsPage {
           new AttributesDescriptor("Heregex content", LiveScriptSyntaxHighlighter.HEREGEX_CONTENT),
           new AttributesDescriptor("Javascript id", LiveScriptSyntaxHighlighter.JAVASCRIPT_ID),
           new AttributesDescriptor("Javascript content", LiveScriptSyntaxHighlighter.JAVASCRIPT_CONTENT),
+
+          new AttributesDescriptor("Backcall", LiveScriptSyntaxHighlighter.BACKCALL),
+          new AttributesDescriptor("Backcall binding", LiveScriptSyntaxHighlighter.BACKCALL_BINDING),
+          new AttributesDescriptor("Pipe", LiveScriptSyntaxHighlighter.PIPE),
+
   };
 
   @NotNull
@@ -93,6 +98,7 @@ public class LiveScriptColorSettingsPage implements ColorSettingsPage {
             "class Animal\n" +
             "  (@name) -> \n" +
             "  move: (meters) -> alert @name + \" moved \" + meters + \"m.\"\n" +
+            "  get-name: -> @name\n"+
             "\n" +
             "class Snake extends Animal\n" +
             "  move: -> \n" +
@@ -105,13 +111,14 @@ public class LiveScriptColorSettingsPage implements ColorSettingsPage {
             "\n" +
             "square = (x) -> x * x\n" +
             "\n" +
+            "[1 to 3] |> map |> sort\n" +
+            "\n" +
+            "e <- $ \\#element onclick\n" +
+            "doSomething e\n" +
+            "\n" +
             "list = [1 til 5]\n" +
             "\n" +
             "alert list.toString!\n" +
-            "\n" +
-            "math =\n" +
-            "  root:   Math.sqrt\n" +
-            "  cube:   (x) => x * square x\n" +
             "\n" +
             "race = (winner, ...runners) ->\n" +
             "  print winner, runners\n" +
@@ -141,9 +148,9 @@ public class LiveScriptColorSettingsPage implements ColorSettingsPage {
             "$('.shopping_cart').bind 'click', (event) ~>\n" +
             "    @customer.purchase @cart\n" +
             "\n" +
-            "hi = `function() {\n" +
+            "hi = ``function() {\n" +
             "  return [document.title, \"Hello JavaScript\"].join(\": \");\n" +
-            "}`";
+            "}``";
   }
 
   public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {

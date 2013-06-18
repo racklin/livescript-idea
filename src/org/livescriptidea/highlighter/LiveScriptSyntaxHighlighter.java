@@ -228,6 +228,22 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
           SyntaxHighlighterColors.STRING.getDefaultAttributes()
   );
 
+
+    static final TextAttributesKey BACKCALL = TextAttributesKey.createTextAttributesKey(
+            "LIVESCRIPT.BACKCALL",
+            SyntaxHighlighterColors.OPERATION_SIGN.getDefaultAttributes()
+    );
+
+    static final TextAttributesKey BACKCALL_BINDING = TextAttributesKey.createTextAttributesKey(
+            "LIVESCRIPT.BACKCALL_BINDING",
+            SyntaxHighlighterColors.OPERATION_SIGN.getDefaultAttributes()
+    );
+
+    static final TextAttributesKey PIPE = TextAttributesKey.createTextAttributesKey(
+            "LIVESCRIPT.PIPE",
+            SyntaxHighlighterColors.OPERATION_SIGN.getDefaultAttributes()
+    );
+
   static {
     TOKENS_TO_STYLES = new HashMap<IElementType, TextAttributesKey>();
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.BAD_CHARACTER, BAD_CHARACTER);
@@ -335,6 +351,11 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.CONTINUE, KEYWORD);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.RETURN, KEYWORD);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.INSTANCE_OF, KEYWORD);
+
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.BACKCALL, BACKCALL);
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.BACKCALL_BIND, BACKCALL_BINDING);
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.PIPE, PIPE);
+
   }
 
   @NotNull
