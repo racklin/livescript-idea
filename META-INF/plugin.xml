@@ -2,7 +2,7 @@
     <id>org.livescriptidea</id>
     <name>LiveScriptIdea</name>
     <description>Plugin for LiveScript language support</description>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <vendor logo="/org/livescriptidea/images/livescript.png" url="https://github.com/racklin/livescript-idea">Rack Lin</vendor>
     <idea-version since-build="9000"/>
     <depends>com.intellij.modules.xml</depends>
@@ -17,6 +17,9 @@
     </project-components>
 
     <actions>
+        <action id="NewLiveScriptFile" class="org.livescriptidea.actions.CreateLiveScriptFileAction">
+            <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
+        </action>
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
