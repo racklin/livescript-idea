@@ -328,6 +328,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   \.{QUOTE} / [^a-zA-Z0-9]    { yybegin(YYQUOTEPROPERTY);
                                 yypushback(yylength()); }
 
+  \\                          { yybegin(YYBACKSLASHQUOTESTRING);
+                                return LiveScriptTokenTypes.STRING_LITERAL; }
+
   "!"                         { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.BANG; }
 
@@ -360,6 +363,9 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 
   "("                         { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.PARENTHESIS_START; }
+
+  ")"                         { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.PARENTHESIS_END; }
 
   {TERMINATOR}                { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.TERMINATOR; }
