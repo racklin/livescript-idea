@@ -1,4 +1,4 @@
-package org.livescriptidea.highlighter;
+package org.livescriptidea.editor;
 
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.psi.PsiComment;

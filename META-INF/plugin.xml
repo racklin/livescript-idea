@@ -2,7 +2,7 @@
     <id>org.livescriptidea</id>
     <name>LiveScriptIdea</name>
     <description>Plugin for LiveScript language support</description>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
     <vendor logo="/org/livescriptidea/images/livescript.png" url="https://github.com/racklin/livescript-idea">Rack Lin</vendor>
     <idea-version since-build="9000"/>
     <depends>com.intellij.modules.xml</depends>
@@ -28,11 +28,20 @@
         <lang.parserDefinition language="LiveScript"
                                implementationClass="org.livescriptidea.lang.parser.LiveScriptParserDefinition"/>
         <lang.commenter language="LiveScript"
-                        implementationClass="org.livescriptidea.highlighter.LiveScriptCommenter"/>
+                        implementationClass="org.livescriptidea.editor.LiveScriptCommenter"/>
+
+        <multiLangCommenter implementation="org.livescriptidea.editor.LiveScriptCommentProvider" order="before erb"/>
+
         <colorSettingsPage implementation="org.livescriptidea.highlighter.LiveScriptColorSettingsPage"/>
         <lang.braceMatcher language="LiveScript"
                            implementationClass="org.livescriptidea.highlighter.LiveScriptBraceMatcher"/>
         <lang.fileViewProviderFactory language="LiveScript"
                                       implementationClass="org.livescriptidea.file.LiveScriptFileViewProviderFactory"/>
+
+        <codeStyleSettingsProvider implementation="org.livescriptidea.formatter.LiveScriptCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider implementation="org.livescriptidea.formatter.LiveScriptLanguageCodeStyleSettingsProvider"/>
+
+        <internalFileTemplate name="LiveScript_Empty_File"/>
+        <internalFileTemplate name="LiveScript_Class"/>
     </extensions>
 </idea-plugin>
