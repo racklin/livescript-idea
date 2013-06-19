@@ -6,6 +6,9 @@ Support Products: IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode,
 * Syntax highlighting with a color settings preference pane
 * Commenting and uncommenting of line and block comments
 * Highlighting of matching braces
+* LiveScript File / Class Templates
+* Code Style with a Code Style settings preference pane
+
 
 ## Installation
 
