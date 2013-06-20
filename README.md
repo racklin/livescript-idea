@@ -13,11 +13,10 @@ Support Products: IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode,
 ## Installation
 
 The plugin can be installed via the JetBrains plugin manager from within your IDE.
-
 [Official Plugins Repository](http://plugins.jetbrains.com/plugin/7266)
 
-Or download binary and install from disk.
-[Download Binary](https://github.com/racklin/livescript-idea/raw/master/livescript-idea.jar)
+Or download lastest binary and install from disk.
+[Download Lastest Binary](https://github.com/racklin/livescript-idea/raw/master/livescript-idea.jar)
 
 ## LiveScriptIdea ScreenShot
 
