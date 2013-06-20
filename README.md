@@ -16,7 +16,7 @@ The plugin can be installed via the JetBrains plugin manager from within your ID
 [Official Plugins Repository](http://plugins.jetbrains.com/plugin/7266)
 
 Or download lastest binary and install from disk.
-[Download Lastest Binary](https://github.com/racklin/livescript-idea/raw/master/livescript-idea.jar)
+[Download Lastest Binary](http://livescript-idea.s3.amazonaws.com/livescript-idea.jar)
 
 ## LiveScriptIdea ScreenShot
 
