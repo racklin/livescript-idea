@@ -1,0 +1,226 @@
+{
+  parserClass="org.livescriptidea.lang.parser.LiveScriptParser"
+  parserUtilClass="org.livescriptidea.lang.parser.LiveScriptParserUtil"
+  stubParserClass="com.livescriptidea.lang.parser.GeneratedParserUtilBase"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="LiveScript"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.livescriptidea.lang.psi"
+  psiImplPackage="org.livescriptidea.lang.psi.impl"
+
+  elementTypeHolderClass="org.livescriptidea.lang.psi.LiveScriptTypes"
+  elementTypeClass="org.livescriptidea.lang.psi.LiveScriptElementType"
+  tokenTypeClass="org.livescriptidea.lang.psi.LiveScriptTokenType"
+}
+
+
+/* converted on Wed Jun 19, 2013, 13:53 (UTC+08) by jison-to-w3c v0.29.550 which is Copyright (c) 2011-2012 by Gunther Rademacher <grd@gmx.net> */
+
+Root     ::= ( Body | Block TERMINATOR )?
+Body     ::= Line ( TERMINATOR Line | TERMINATOR )*
+Line     ::= Expression
+           | Statement
+Statement
+         ::= Return
+           | Comment
+           | STATEMENT
+Expression
+         ::= Value
+           | Invocation
+           | Code
+           | Operation
+           | Assign
+           | If
+           | Try
+           | While
+           | For
+           | Switch
+           | Class
+           | Throw
+Block    ::= INDENT OUTDENT
+           | INDENT Body OUTDENT
+Identifier
+         ::= IDENTIFIER
+AlphaNumeric
+         ::= NUMBER
+           | STRING
+Literal  ::= AlphaNumeric
+           | JS
+           | REGEX
+           | DEBUGGER
+           | UNDEFINED
+           | NULL
+           | BOOL
+Assign   ::= Assignable '=' Expression
+           | Assignable '=' TERMINATOR Expression
+           | Assignable '=' INDENT Expression OUTDENT
+AssignObj
+         ::= ObjAssignable
+           | ObjAssignable ':' Expression
+           | ObjAssignable ':' INDENT Expression OUTDENT
+           | Comment
+ObjAssignable
+         ::= Identifier
+           | AlphaNumeric
+           | ThisProperty
+Return   ::= RETURN Expression
+           | RETURN
+Comment  ::= HERECOMMENT
+Code     ::= PARAM_START ParamList PARAM_END FuncGlyph Block
+           | FuncGlyph Block
+FuncGlyph
+         ::= '->'
+           | '~>'
+OptComma ::= ','?
+ParamList
+         ::= ( Param | ParamList ',' Param | ParamList OptComma TERMINATOR Param | ParamList OptComma INDENT ParamList OptComma OUTDENT )?
+Param    ::= ParamVar
+           | ParamVar '...'
+           | ParamVar '=' Expression
+ParamVar ::= Identifier
+           | ThisProperty
+           | Array
+           | Object
+Splat    ::= Expression '...'
+SimpleAssignable
+         ::= Identifier
+           | Value Accessor
+           | Invocation Accessor
+           | ThisProperty
+Assignable
+         ::= SimpleAssignable
+           | Array
+           | Object
+Value    ::= Assignable
+           | Literal
+           | Parenthetical
+           | Range
+           | This
+Accessor ::= '.' Identifier
+           | '?.' Identifier
+           | '::' Identifier
+           | '?::' Identifier
+           | '::'
+           | INDEX_SOAK* INDEX_START IndexValue INDEX_END
+IndexValue
+         ::= Expression
+           | Slice
+Object   ::= '{' AssignList OptComma '}'
+AssignList
+         ::= ( AssignObj | AssignList ',' AssignObj | AssignList OptComma TERMINATOR AssignObj | AssignList OptComma INDENT AssignList OptComma OUTDENT )?
+Class    ::= CLASS
+           | CLASS Block
+           | CLASS EXTENDS Expression
+           | CLASS EXTENDS Expression Block
+           | CLASS SimpleAssignable
+           | CLASS SimpleAssignable Block
+           | CLASS SimpleAssignable EXTENDS Expression
+           | CLASS SimpleAssignable EXTENDS Expression Block
+Invocation
+         ::= ( Value OptFuncExist Arguments | SUPER | SUPER Arguments ) ( OptFuncExist Arguments )*
+OptFuncExist
+         ::= FUNC_EXIST?
+Arguments
+         ::= CALL_START CALL_END
+           | CALL_START ArgList OptComma CALL_END
+This     ::= THIS
+           | '@'
+ThisProperty
+         ::= '@' Identifier
+Array    ::= '[' ']'
+           | '[' ArgList OptComma ']'
+RangeDots
+         ::= 'to'
+           | 'til'
+Range    ::= '[' Expression RangeDots Expression ']'
+Slice    ::= Expression RangeDots Expression
+           | Expression RangeDots
+           | RangeDots Expression
+           | RangeDots
+ArgList  ::= Arg
+           | ArgList ',' Arg
+           | ArgList OptComma TERMINATOR Arg
+           | INDENT ArgList OptComma OUTDENT
+           | ArgList OptComma INDENT ArgList OptComma OUTDENT
+Arg      ::= Expression
+           | Splat
+SimpleArgs
+         ::= Expression ( ',' Expression )*
+Try      ::= TRY Block
+           | TRY Block Catch
+           | TRY Block FINALLY Block
+           | TRY Block Catch FINALLY Block
+Catch    ::= CATCH Identifier Block
+           | CATCH Object Block
+           | CATCH Block
+Throw    ::= THROW Expression
+Parenthetical
+         ::= '(' Body ')'
+           | '(' INDENT Body OUTDENT ')'
+WhileSource
+         ::= WHILE Expression
+           | WHILE Expression WHEN Expression
+           | UNTIL Expression
+           | UNTIL Expression WHEN Expression
+While    ::= WhileSource Block
+           | Statement WhileSource
+           | Expression WhileSource
+           | Loop
+Loop     ::= LOOP Block
+           | LOOP Expression
+For      ::= Statement ForBody
+           | Expression ForBody
+           | ForBody Block
+ForBody  ::= FOR Range
+           | ForStart ForSource
+ForStart ::= FOR ForVariables
+           | FOR OWN ForVariables
+ForValue ::= Identifier
+           | ThisProperty
+           | Array
+           | Object
+ForVariables
+         ::= ForValue
+           | ForValue ',' ForValue
+ForSource
+         ::= FORIN Expression
+           | FOROF Expression
+           | FORIN Expression WHEN Expression
+           | FOROF Expression WHEN Expression
+           | FORIN Expression BY Expression
+           | FORIN Expression WHEN Expression BY Expression
+           | FORIN Expression BY Expression WHEN Expression
+Switch   ::= SWITCH Expression INDENT Whens OUTDENT
+           | SWITCH Expression INDENT Whens ELSE Block OUTDENT
+           | SWITCH INDENT Whens OUTDENT
+           | SWITCH INDENT Whens ELSE Block OUTDENT
+Whens    ::= When+
+When     ::= LEADING_WHEN SimpleArgs Block
+           | LEADING_WHEN SimpleArgs Block TERMINATOR
+IfBlock  ::= IF Expression Block ( ELSE IF Expression Block )*
+If       ::= IfBlock
+           | IfBlock ELSE Block
+           | Statement POST_IF Expression
+           | Expression POST_IF Expression
+Operation
+         ::= UNARY Expression
+           | '-' Expression
+           | '+' Expression
+           | '--' SimpleAssignable
+           | '++' SimpleAssignable
+           | SimpleAssignable '--'
+           | SimpleAssignable '++'
+           | Expression '?'
+           | Expression '+' Expression
+           | Expression '-' Expression
+           | Expression MATH Expression
+           | Expression SHIFT Expression
+           | Expression COMPARE Expression
+           | Expression LOGIC Expression
+           | Expression RELATION Expression
+           | SimpleAssignable COMPOUND_ASSIGN Expression
+           | SimpleAssignable COMPOUND_ASSIGN INDENT Expression OUTDENT
+           | SimpleAssignable COMPOUND_ASSIGN TERMINATOR Expression
+           | SimpleAssignable EXTENDS Expression
