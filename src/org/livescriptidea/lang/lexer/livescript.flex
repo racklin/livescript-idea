@@ -108,15 +108,16 @@ NUMBER          = (0(x|X)[0-9a-fA-F]+)|(-?[0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)
 FUNCTION        = [_a-zA-Z]([$\-_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
 OBJECT_KEY      = [_a-zA-Z]([$\-_a-zA-Z0-9])*[:][^:]
 
-RESERVED        = with|enum|export|native|__hasProp|__extends|__slice|__bind|__indexOf
-LOGIC           = and|&&|or|\|\||&|\||\^|\?
-COMPARE         = ==|\!=|<|>|<=|>=|is|isnt
+RESERVED        = with|enum|native|__hasProp|__extends|__slice|__bind|__indexOf
+LOGIC           = and|&&|or|\|\||&|\||\^|\?|xor
+COMPARE         = ==|\!=|<|>|<=|>=|is|isnt|not
 COMPOUND_ASSIGN = -=|\+=|\/=|\*=|%=|\|\|=|&&=|\?=|<<=|>>=|>>>=|&=|\^=|\|=|or=
 BOOL            = true|yes|on|false|no|off|undefined|null
 UNARY           = do|new|typeof|typeof\!|delete|\~|\!|not
-QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or|all|case|default|from|xor|match|own|otherwise|function|var|let|super
+QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or|case|default|from|xor|match|own|otherwise|function|var|let|super
 IMPORT          = <<<|import
 IMPORT_ALL      = <<<<
+KEYWORDS        = let|export|fallthrough|from|otherwise|var
 
 
 %state YYIDENTIFIER, YYNUMBER, YYJAVASCRIPT, YYJAVASCRIPT_CALL
@@ -197,6 +198,7 @@ IMPORT_ALL      = <<<<
 
   {IMPORT}                    { return LiveScriptTokenTypes.IMPORT; }
 
+  {KEYWORDS}                  { return LiveScriptTokenTypes.KEYWORDS; }
 
   {IDENTIFIER}                { yybegin(YYIDENTIFIER);
                                 return LiveScriptTokenTypes.IDENTIFIER; }
@@ -220,6 +222,9 @@ IMPORT_ALL      = <<<<
 
   {NUMBER}                    { yybegin(YYNUMBER);
                                 return LiveScriptTokenTypes.NUMBER; }
+
+  "-->"                        { return LiveScriptTokenTypes.FUNCTION; }
+  "~~>"                        { return LiveScriptTokenTypes.FUNCTION_BIND; }
 
   "=>"                        { return LiveScriptTokenTypes.THEN; }
 

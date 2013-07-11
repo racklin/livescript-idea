@@ -122,4 +122,7 @@ public interface LiveScriptTokenTypes {
   public static final IElementType BACKCALL_BIND = new LiveScriptElementType("BACKCALL_BIND");
   public static final IElementType PIPE = new LiveScriptElementType("PIPE");
 
+  public static final IElementType KEYWORDS = new LiveScriptElementType("KEYWORDS");
+
+
 }

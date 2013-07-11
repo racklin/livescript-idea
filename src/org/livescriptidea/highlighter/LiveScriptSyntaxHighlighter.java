@@ -376,6 +376,9 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.IMPORT, IMPORT);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.IMPORT_ALL, IMPORT_ALL);
 
+      TOKENS_TO_STYLES.put(LiveScriptTokenTypes.KEYWORDS, KEYWORD);
+
+
   }
 
   @NotNull

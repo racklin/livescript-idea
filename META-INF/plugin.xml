@@ -21,7 +21,7 @@
         <![CDATA[
         <h3>0.1.5 changes:</h3>
             <ul>
-                <li>[feature]Add <<< <<<< import super keywords</li>
+                <li>[feature]Add <<< <<<< import super let export var from keywords</li>
                 <li>[feature]Add backticks ` support</li>
             </ul>
         <h3>0.1.4 changes:</h3>
