@@ -185,7 +185,12 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
 
   static final TextAttributesKey THIS = TextAttributesKey.createTextAttributesKey(
           "LIVESCRIPT.THIS",
-          SyntaxHighlighterColors.OPERATION_SIGN.getDefaultAttributes()
+          SyntaxHighlighterColors.KEYWORD.getDefaultAttributes()
+  );
+
+  static final TextAttributesKey SUPER = TextAttributesKey.createTextAttributesKey(
+        "LIVESCRIPT.SUPER",
+        SyntaxHighlighterColors.KEYWORD.getDefaultAttributes()
   );
 
   static final TextAttributesKey COLON = TextAttributesKey.createTextAttributesKey(
@@ -243,6 +248,17 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
             "LIVESCRIPT.PIPE",
             SyntaxHighlighterColors.OPERATION_SIGN.getDefaultAttributes()
     );
+
+    static final TextAttributesKey IMPORT = TextAttributesKey.createTextAttributesKey(
+            "LIVESCRIPT.IMPORT",
+            SyntaxHighlighterColors.KEYWORD.getDefaultAttributes()
+    );
+
+    static final TextAttributesKey IMPORT_ALL = TextAttributesKey.createTextAttributesKey(
+            "LIVESCRIPT.IMPORT_ALL",
+            SyntaxHighlighterColors.KEYWORD.getDefaultAttributes()
+    );
+
 
   static {
     TOKENS_TO_STYLES = new HashMap<IElementType, TextAttributesKey>();
@@ -323,6 +339,7 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.RANGE, RANGE);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.SPLAT, SPLAT);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.THIS, THIS);
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.SUPER, SUPER);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.PROTOTYPE, PROTOTYPE);
 
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.FUNCTION, FUNCTION);
@@ -355,6 +372,9 @@ public class LiveScriptSyntaxHighlighter extends SyntaxHighlighterBase {
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.BACKCALL, BACKCALL);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.BACKCALL_BIND, BACKCALL_BINDING);
     TOKENS_TO_STYLES.put(LiveScriptTokenTypes.PIPE, PIPE);
+
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.IMPORT, IMPORT);
+    TOKENS_TO_STYLES.put(LiveScriptTokenTypes.IMPORT_ALL, IMPORT_ALL);
 
   }
 

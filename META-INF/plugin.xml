@@ -2,7 +2,7 @@
     <id>org.livescriptidea</id>
     <name>LiveScriptIdea</name>
     <description>Plugin for LiveScript language support</description>
-    <version>0.1.4</version>
+    <version>0.1.5</version>
     <vendor email="racklin@gmail.com" logo="/org/livescriptidea/images/livescript.png" url="https://github.com/racklin/livescript-idea">Rack Lin</vendor>
     <description>
         <![CDATA[
@@ -19,6 +19,11 @@
     </description>
     <change-notes>
         <![CDATA[
+        <h3>0.1.5 changes:</h3>
+            <ul>
+                <li>[feature]Add <<< <<<< import super keywords</li>
+                <li>[feature]Add backticks ` support</li>
+            </ul>
         <h3>0.1.4 changes:</h3>
             <ul>
                 <li>[feature]Add CodeStyle with a Code Style settings preference pane</li>

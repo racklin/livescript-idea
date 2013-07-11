@@ -82,6 +82,7 @@ public interface LiveScriptTokenTypes {
   public static final IElementType RANGE = new LiveScriptElementType("RANGE");
   public static final IElementType SPLAT = new LiveScriptElementType("SPLAT");
   public static final IElementType THIS = new LiveScriptElementType("THIS");
+  public static final IElementType SUPER = new LiveScriptElementType("SUPER");
   public static final IElementType PROTOTYPE = new LiveScriptElementType("PROTOTYPE");
   public static final IElementType FUNCTION = new LiveScriptElementType("FUNCTION");
   public static final IElementType FUNCTION_BIND = new LiveScriptElementType("FUNCTION_BIND");
@@ -114,7 +115,8 @@ public interface LiveScriptTokenTypes {
   public static final IElementType RETURN = new LiveScriptElementType("RETURN");
   public static final IElementType INSTANCE_OF = new LiveScriptElementType("INSTANCE_OF");
 
-
+  public static final IElementType IMPORT = new LiveScriptElementType("IMPORT");
+  public static final IElementType IMPORT_ALL = new LiveScriptElementType("IMPORT_ALL");
 
   public static final IElementType BACKCALL = new LiveScriptElementType("BACKCALL");
   public static final IElementType BACKCALL_BIND = new LiveScriptElementType("BACKCALL_BIND");

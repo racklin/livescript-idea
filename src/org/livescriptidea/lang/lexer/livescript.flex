@@ -114,9 +114,12 @@ COMPARE         = ==|\!=|<|>|<=|>=|is|isnt
 COMPOUND_ASSIGN = -=|\+=|\/=|\*=|%=|\|\|=|&&=|\?=|<<=|>>=|>>>=|&=|\^=|\|=|or=
 BOOL            = true|yes|on|false|no|off|undefined|null
 UNARY           = do|new|typeof|typeof\!|delete|\~|\!|not
-QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or|import|all|case|default|from|xor|match|own|otherwise|function|var|let
+QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless|for|in|of|by|while|until|switch|when|break|continue|return|instanceof|true|yes|on|false|no|off|undefined|null|do|new|typeof|delete|not|and|or|all|case|default|from|xor|match|own|otherwise|function|var|let|super
+IMPORT          = <<<|import
+IMPORT_ALL      = <<<<
 
-%state YYIDENTIFIER, YYNUMBER, YYJAVASCRIPT
+
+%state YYIDENTIFIER, YYNUMBER, YYJAVASCRIPT, YYJAVASCRIPT_CALL
 %state YYDOUBLEQUOTESTRING, YYSINGLEQUOTESTRING, YYBACKSLASHQUOTESTRING
 %state YYDOUBLEQUOTEHEREDOC, YYSINGLEQUOTEHEREDOC
 %state YYREGEX, YYHEREGEX, YYREGEXFLAG, YYREGEXCHARACTERCLASS
@@ -136,6 +139,7 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 
   "@"                         { return LiveScriptTokenTypes.THIS; }
   "this"                      { return LiveScriptTokenTypes.THIS; }
+  "super"                     { return LiveScriptTokenTypes.SUPER; }
 
   "class"                     { return LiveScriptTokenTypes.CLASS; }
   "extends"                   { return LiveScriptTokenTypes.EXTENDS; }
@@ -185,6 +189,14 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
 
   "``"                        { yybegin(YYJAVASCRIPT);
                                 return LiveScriptTokenTypes.JAVASCRIPT_LITERAL; }
+
+  "`"                         { yybegin(YYJAVASCRIPT_CALL);
+                                return LiveScriptTokenTypes.JAVASCRIPT_LITERAL; }
+
+  {IMPORT_ALL}                { return LiveScriptTokenTypes.IMPORT_ALL; }
+
+  {IMPORT}                    { return LiveScriptTokenTypes.IMPORT; }
+
 
   {IDENTIFIER}                { yybegin(YYIDENTIFIER);
                                 return LiveScriptTokenTypes.IDENTIFIER; }
@@ -633,7 +645,24 @@ QUOTE           = this|class|extends|try|catch|finally|throw|if|then|else|unless
   "``"                         { yybegin(YYINITIAL);
                                 return LiveScriptTokenTypes.JAVASCRIPT_LITERAL; }
 
+
   [^``]+                       { return LiveScriptTokenTypes.JAVASCRIPT; }
+
+  [^]                         { yypushback(yytext().length());
+                                yybegin(YYINITIAL); }
+}
+
+
+/***********************/
+/* Call JavaScript Function*/
+/***********************/
+
+<YYJAVASCRIPT_CALL> {
+  "`"                         { yybegin(YYINITIAL);
+                                return LiveScriptTokenTypes.JAVASCRIPT_LITERAL; }
+
+
+  [^`]+                       { return LiveScriptTokenTypes.JAVASCRIPT; }
 
   [^]                         { yypushback(yytext().length());
                                 yybegin(YYINITIAL); }
