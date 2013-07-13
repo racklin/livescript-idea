@@ -3,8 +3,8 @@ package org.livescriptidea;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.fileTypes.FileTypeManager;
-import org.livescriptidea.file.LiveScriptFileType;
 import org.jetbrains.annotations.NotNull;
+import org.livescriptidea.file.LiveScriptFileType;
 
 /**
  * Main application component that loads the LiveScript language support

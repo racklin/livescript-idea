@@ -2,10 +2,10 @@ package org.livescriptidea.file;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import org.livescriptidea.LiveScriptIcons;
-import org.livescriptidea.LiveScriptLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.livescriptidea.LiveScriptIcons;
+import org.livescriptidea.LiveScriptLanguage;
 
 import javax.swing.*;
 
