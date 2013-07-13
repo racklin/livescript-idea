@@ -8,6 +8,7 @@ Support Products: IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, AppCode,
 * Highlighting of matching braces
 * LiveScript File / Class Templates
 * Code Style with a Code Style settings preference pane
+* Preview Compiled LiveScript File
 
 
 ## Installation
@@ -21,6 +22,8 @@ Or download lastest binary and install from disk.
 ## LiveScriptIdea ScreenShot
 
 ![LiveScriptIdea](https://github.com/racklin/livescript-idea/raw/master/resources/theme/LiveScriptIdea.png)
+![LiveScriptIdea](http://plugins.jetbrains.com/files/7266/screenshot_14272.png)
+![LiveScriptIdea](http://plugins.jetbrains.com/files/7266/screenshot_14273.png)
 
 The [LiveScriptIdea theme](
 https://github.com/racklin/livescript-idea/raw/master/resources/theme/LiveScriptIdea.xml) provides a dark color scheme that
