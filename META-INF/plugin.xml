@@ -2,7 +2,7 @@
     <id>org.livescriptidea</id>
     <name>LiveScriptIdea</name>
     <description>Plugin for LiveScript language support</description>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
     <vendor email="racklin@gmail.com" logo="/org/livescriptidea/images/livescript.png" url="https://github.com/racklin/livescript-idea">Rack Lin</vendor>
     <description>
         <![CDATA[
