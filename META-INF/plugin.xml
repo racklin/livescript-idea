@@ -40,7 +40,8 @@
         ]]>
     </change-notes>
     <idea-version since-build="9000"/>
-    <depends>com.intellij.modules.xml</depends>
+    <depends>JavaScript</depends>
+    <depends>com.intellij.modules.ultimate</depends>
 
     <application-components>
         <component>
