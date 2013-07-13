@@ -3,8 +3,8 @@ package org.livescriptidea.editor;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.tree.IElementType;
-import org.livescriptidea.lang.lexer.LiveScriptTokenTypes;
 import org.jetbrains.annotations.Nullable;
+import org.livescriptidea.lang.lexer.LiveScriptTokenTypes;
 
 /**
  * Commenting and uncommenting of LiveScript code blocks

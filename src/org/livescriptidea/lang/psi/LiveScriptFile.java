@@ -5,7 +5,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
-import static org.livescriptidea.file.LiveScriptFileType.*;
+import static org.livescriptidea.file.LiveScriptFileType.LIVE_SCRIPT_FILE_TYPE;
 
 /**
  * A LiveScript file

@@ -6,9 +6,8 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.templateLanguages.MultipleLangCommentProvider;
-import java.util.Set;
-import org.livescriptidea.file.LiveScriptFileType;
 import org.jetbrains.annotations.Nullable;
+import org.livescriptidea.file.LiveScriptFileType;
 
 public class LiveScriptCommentProvider implements MultipleLangCommentProvider {
 

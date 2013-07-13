@@ -10,13 +10,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-
+import org.jetbrains.annotations.NotNull;
 import org.livescriptidea.file.LiveScriptFileType;
 import org.livescriptidea.lang.lexer.LiveScriptLexerAdapter;
 import org.livescriptidea.lang.lexer.LiveScriptTokenSets;
 import org.livescriptidea.lang.psi.LiveScriptFile;
 import org.livescriptidea.lang.psi.impl.LiveScriptElementImpl;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Parser definition for LiveScript language support
