@@ -4,8 +4,8 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import org.livescriptidea.LiveScriptIcons;
 import org.jetbrains.annotations.NotNull;
+import org.livescriptidea.LiveScriptIcons;
 
 import javax.swing.*;
 import java.util.Map;

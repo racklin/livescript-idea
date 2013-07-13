@@ -4,9 +4,9 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import org.livescriptidea.lang.lexer.LiveScriptTokenTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.livescriptidea.lang.lexer.LiveScriptTokenTypes;
 
 /**
  * Brace matcher for the LiveScript language
