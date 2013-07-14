@@ -1,6 +1,7 @@
 package org.livescriptidea;
 
 import com.intellij.lang.Language;
+import com.intellij.lang.javascript.JavascriptLanguage;
 
 /**
  * All main properties for the LiveScript language
@@ -10,8 +11,8 @@ import com.intellij.lang.Language;
  */
 public class LiveScriptLanguage extends Language {
 
-  public LiveScriptLanguage() {
-    super("LiveScript", "text/ls");
+    public LiveScriptLanguage() {
+        super(JavascriptLanguage.INSTANCE, "LiveScript", new String[] { "text/ls" });
   }
 
   @Override

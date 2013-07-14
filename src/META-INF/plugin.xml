@@ -2,7 +2,7 @@
     <id>org.livescriptidea</id>
     <name>LiveScriptIdea</name>
     <description>Plugin for LiveScript language support</description>
-    <version>0.1.6</version>
+    <version>0.1.7</version>
     <vendor email="racklin@gmail.com" logo="/org/livescriptidea/images/livescript.png" url="https://github.com/racklin/livescript-idea">Rack Lin</vendor>
     <description>
         <![CDATA[
@@ -14,11 +14,17 @@
           <li>Highlighting of matching braces</li>
           <li>LiveScript File / Class Templates</li>
           <li>Code Style with a Code Style settings preference pane</li>
+          <li>Preview Compiled LiveScript File</li>
+          <li>LiveScript File Watcher</li>
         </ul>
         ]]>
     </description>
     <change-notes>
         <![CDATA[
+        <h3>0.1.7 changes:</h3>
+            <ul>
+                <li>[feature]Add LiveScript File Watcher To Compile LiveScript File To JavaScirpt.</li>
+            </ul>
         <h3>0.1.6 changes:</h3>
             <ul>
                 <li>[feature]Add Preview Compiled LiveScript File</li>
@@ -42,6 +48,8 @@
     <idea-version since-build="9000"/>
     <depends>JavaScript</depends>
     <depends>com.intellij.modules.ultimate</depends>
+    <depends optional="true" config-file="livescript-watcher.xml">com.intellij.plugins.watcher</depends>
+
 
     <application-components>
         <component>

@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij.plugins.watcher">
+        <consumer implementation="org.livescriptidea.watcher.LiveScriptTaskConsumer"/>
+    </extensions>
+</idea-plugin>
