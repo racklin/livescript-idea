@@ -101,12 +101,12 @@ import java.util.Stack;
 TERMINATOR      = [\n\r]|\\\n
 WHITE_SPACE     = [ \t]+
 
-IDENTIFIER      = [$_a-z][$_a-zA-Z0-9]*
-CLASS_NAME      = [A-Z][$_a-zA-Z0-9]*
+IDENTIFIER      = [$_a-z][$_\-a-zA-Z0-9]*
+CLASS_NAME      = [A-Z][$_\-a-zA-Z0-9]*
 CONSTANT        = [A-Z][$_A-Z0-9]*
 NUMBER          = (0(x|X)[0-9a-fA-F]+)|(-?[0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)
-FUNCTION        = [_a-zA-Z]([$\-_a-zA-Z0-9])*?[:]([^\n\r])*?(->|~>|-->|~~>)
-OBJECT_KEY      = [_a-zA-Z]([$\-_a-zA-Z0-9])*[:][^:]
+FUNCTION        = [_a-zA-Z]([$\-_a-zA-Z0-9])*?[ \t]*?[:]([^\n\r])*?(->|~>|-->|~~>)
+OBJECT_KEY      = [_a-zA-Z]([$\-_a-zA-Z0-9])*?[ \t]*?[:][^:]
 
 RESERVED        = with|enum|native|__hasProp|__extends|__slice|__bind|__indexOf
 LOGIC           = and|&&|or|\|\||&|\||\^|\?|xor
